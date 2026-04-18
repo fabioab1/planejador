@@ -122,5 +122,37 @@ function moverTarefa(id, novaColuna) {
 }
 
 function filtroHoje (data) {
+    const hoje = new Date().toISOString().slice(0, 10);
+    return data === hoje;
+}
+
+function filtroSemana (data) {
+    const hoje = new Date();
+    const futura = new Date();
+    futura.setDate(hoje.getDate() + 7);
+
+    const d = new Date(data);
+    return d >= hoje && d <= futura;
+}
+
+function renderizarAgenda() {
+    const hojeDiv = document.querySelector("#lista-hoje");
+    const semanaDiv = document.querySelector("#lista-semana");
+
+    hojeDiv.innerHTML = "";
+    semanaDiv.innerHTML = "";
+
+    tarefas.forEach(t => {
+        if (t.data) {
+            if (filtroHoje(t.data)) {
+                hojeDiv.innerHTML += `<div>${t.descricao}</div>`;
+            } else if (filtroSemana(t.data)) {
+                semanaDiv.innerHTML += `<div>${t.descricao}</div>`;
+            }
+        }
+    });
+}
+
+function renderizarConcluidas() {
     
 }
