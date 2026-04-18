@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Tarefas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-title">📋 Gestor de Tarefas</div>
+  <div class="nav-links">
+    <a href="index.html">Início</a>
+    <a href="concluidas.html">Concluídas</a>
+    <a href="calendario.html">Calendário</a>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form">
+  <input class="input" type="text" placeholder="Descrição da tarefa">
+  
+  <select>
+    <option>Alta</option>
+    <option>Média</option>
+    <option>Baixa</option>
+  </select>
+
+  <input class="input" type="date">
+
+  <button class="btn btn-primary">Adicionar</button>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h3>📅 Hoje</h3>
+  <div class="list"></div>
+
+  <h3>🗓️ Esta Semana</h3>
+  <div class="list"></div>
+</div>
+
+<!-- KANBAN -->
+<div class="kanban">
+  
+  <div class="column">
+    <h3>Entrada</h3>
+  </div>
+
+  <div class="column">
+    <h3>Hoje</h3>
+  </div>
+
+  <div class="column">
+    <h3>Esta Semana</h3>
+  </div>
+
+  <div class="column">
+    <h3>Mais Tarde</h3>
+  </div>
+
+</div>
+
+</body>
+</html>
