@@ -154,5 +154,27 @@ function renderizarAgenda() {
 }
 
 function renderizarConcluidas() {
-    
+    const lista = document.querySelector("#lista-concluidas");
+
+    tarefas
+        .filter(t => t.concluida)
+        .sort((a, b) => b.criadaEm - a.criadaEm)
+        .forEach(t => {
+            lista.innerHTML += `
+                <div class="card>
+                    ${t.descricao}
+                    <button onclick="restaurar('${t.id}')">↩️</button>
+                    <button onclick="deletar('${t.id}')">🗑️</button>
+                </div>
+            `;
+        });
+}
+
+function restaurar(id) {
+    const tarefa = tarefas.find(t => t.id === id);
+    tarefa.concluida = false;
+    tarefa.coluna = "entrada";
+
+    salvarTarefas();
+    renderizarTarefas();
 }
