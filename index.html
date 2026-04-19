@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Gestor de Tarefas</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -29,16 +29,16 @@
 
   <input class="input" type="date">
 
-  <button class="btn btn-primary" >Adicionar</button>
+  <button class="btn btn-primary" id="btnAdicionar">Adicionar</button>
 </div>
 
 <!-- SIDEBAR -->
 <div class="sidebar">
   <h3>📅 Hoje</h3>
-  <div class="list"></div>
+  <div class="list" id="lista-hoje"></div>
 
   <h3>🗓️ Esta Semana</h3>
-  <div class="list"></div>
+  <div class="list" id="lista-semana"></div>
 </div>
 
 <!-- KANBAN -->
@@ -46,18 +46,22 @@
   
   <div class="column" id="entrada">
     <h3>Entrada</h3>
+    <div class="cards"></div>
   </div>
 
   <div class="column" id="hoje">
     <h3>Hoje</h3>
+    <div class="cards"></div>
   </div>
 
   <div class="column" id="semana">
     <h3>Esta Semana</h3>
+    <div class="cards"></div>
   </div>
 
   <div class="column" id="depois">
     <h3>Mais Tarde</h3>
+    <div class="cards"></div>
   </div>
 
 </div>

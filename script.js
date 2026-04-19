@@ -29,7 +29,7 @@ function criarTarefa(descricao, prioridade, data) {
     renderizarTarefas();
 }
 
-document.querySelector("button").addEventListener("click", () => {
+document.querySelector("#btnAdicionar").addEventListener("click", () => {
     const desc = document.querySelector("input[type=text]").value;
     const prio = document.querySelector("select").value;
     const data = document.querySelector("input[type=date]").value;
@@ -38,14 +38,19 @@ document.querySelector("button").addEventListener("click", () => {
 });
 
 function renderizarTarefas() {
-    document.querySelectorAll(".column").forEach(col => col.innerHTML = "");
+    document.querySelectorAll(".cards").forEach(col => col.innerHTML = "");
 
     tarefas
         .filter(t => !t.concluida)
         .forEach(tarefa => {
             const card = criarCard(tarefa);
-            document.getElementById(tarefa.coluna).appendChild(card);
+
+            document
+                .querySelector(`#${tarefa.coluna} .cards`)
+                .appendChild(card);
         });
+    
+    renderizarAgenda();
 }
 
 function criarCard(tarefa) {
