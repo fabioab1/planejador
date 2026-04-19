@@ -181,9 +181,9 @@ function renderizarAgenda() {
             if (t.data) {
 
                 if (filtroHoje(t.data)) {
-                    hojeDiv.innerHTML += `<div>${t.descricao}</div>`;
+                    hojeDiv.innerHTML += `<div>${t.descricao} - ${formatarData(t.data)}</div>`;
                 } else if (filtroSemana(t.data)) {
-                    semanaDiv.innerHTML += `<div>${t.descricao}</div>`;
+                    semanaDiv.innerHTML += `<div>${t.descricao} - ${formatarData(t.data)}</div>`;
                 }
             }
         });
