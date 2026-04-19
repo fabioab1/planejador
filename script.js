@@ -32,6 +32,30 @@ document.addEventListener("DOMContentLoaded", () => {
             atualizarNotaMes()
         });
 
+        document.getElementById("btnAddLembrete").addEventListener("click", () => {
+            const desc = document.getElementById("lembrete").value;
+            const data = document.getElementById("data").value;
+            const hora = document.getElementById("hora").value;
+
+            if (!desc || !data) {
+                alert("Preencha a descrição e a data!");
+                return;
+            }
+
+            criarLembrete(desc, data, hora);
+
+            document.getElementById("lembrete").value = "";
+            document.getElementById("data").value = "";
+            document.getElementById("hora").value = "";
+        });
+
+        document.getElementById("btnNotasMes")?.addEventListener("click", () => {
+            const input = document.getElementById("notasMes");
+            notasMensais[chaveMes()] = input.value;
+            salvarNotaMes();
+            atualizarNotaMes();
+        });
+
     }
 });
 
@@ -266,16 +290,6 @@ function criarLembrete(descricao, data, hora) {
     renderizarCalendario();
 }
 
-if (document.querySelector("#btnAddLembrete")) {
-    document.querySelector("#btnAddLembrete").addEventListener("click", () => {
-        const desc = document.getElementById("lembrete").value;
-        const data = document.getElementById("data").value;
-        const hora = document.getElementById("hora").value;
-
-        criarLembrete(desc, data, hora);
-    })
-}
-
 function renderizarCalendario() {
     const grid = document.getElementById("calendarGrid");
     const mesTitulo = document.getElementById("mesAtual");
@@ -337,14 +351,17 @@ function chaveMes() {
 
 function atualizarNotaMes() {
     const input = document.getElementById("notasMes");
+    const exibicao = document.getElementById("notaMesExibicao");
+
     if (!input) return;
 
-    input.value = notasMensais[chaveMes()] || "";
+    const nota = notasMensais[chaveMes()] || "";
+
+    input.value = "";
+
+    if (exibicao) {
+        exibicao.innerHTML = nota
+            ? `📝 ${nota}`
+            : "";
+    }
 }
-
-document.getElementById("btnNotasMes")?.addEventListener("click", () => {
-    const input = document.getElementById("notasMes");
-    notasMensais[chaveMes()] = input.value;
-    salvarNotaMes();
-});
-

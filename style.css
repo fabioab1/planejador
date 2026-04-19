@@ -169,3 +169,12 @@ body {
   border-radius: 14px;
   margin: 20px;
 }
+
+.nota-mes {
+  background: #fff7ed;
+  border-left: 6px solid #f59e0b;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-top: 15px;
+}
