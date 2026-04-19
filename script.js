@@ -49,7 +49,7 @@ function renderizarTarefas() {
                 .querySelector(`#${tarefa.coluna} .cards`)
                 .appendChild(card);
         });
-    
+
     renderizarAgenda();
 }
 
@@ -126,12 +126,21 @@ function moverTarefa(id, novaColuna) {
     renderizarTarefas();
 }
 
-function filtroHoje (data) {
-    const hoje = new Date().toISOString().slice(0, 10);
-    return data === hoje;
+function formatoLocal(data) {
+    const d = new Date(data);
+    return d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
 }
 
-function filtroSemana (data) {
+function filtroHoje(data) {
+    const hoje = new Date();
+    const hojeFormatado = formatoLocal(hoje);
+
+    return data === hojeFormatado;
+}
+
+function filtroSemana(data) {
     const hoje = new Date();
     const futura = new Date();
     futura.setDate(hoje.getDate() + 7);
@@ -147,16 +156,20 @@ function renderizarAgenda() {
     hojeDiv.innerHTML = "";
     semanaDiv.innerHTML = "";
 
-    tarefas.forEach(t => {
-        if (t.data) {
-            if (filtroHoje(t.data)) {
-                hojeDiv.innerHTML += `<div>${t.descricao}</div>`;
-            } else if (filtroSemana(t.data)) {
-                semanaDiv.innerHTML += `<div>${t.descricao}</div>`;
+    tarefas
+        .filter(t => !t.concluida)
+        .forEach(t => {
+            if (t.data) {
+                if (filtroHoje(t.data)) {
+                    hojeDiv.innerHTML += `<div>${t.descricao}</div>`;
+                } else if (filtroSemana(t.data)) {
+                    semanaDiv.innerHTML += `<div>${t.descricao}</div>`;
+                }
             }
-        }
-    });
+        });
 }
+
+
 
 function renderizarConcluidas() {
     const lista = document.querySelector("#lista-concluidas");
