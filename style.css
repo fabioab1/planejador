@@ -123,19 +123,38 @@ body {
   margin-bottom: 10px;
 }
 
+.week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 5px;
+}
+
+.week-header div {
+  text-align: center;
+  font-weight: bold;
+}
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 8px;
 }
 
 .day {
   background: white;
-  border-radius: 10px;
-  padding: 8px;
-  min-height: 80px;
+  border-radius: 12px;
+  padding: 6px;
+  min-height: 100px;
   border: 1px solid #ddd;
   font-size: 12px;
+}
+
+.lembrete {
+  background: #e0f2fe;
+  margin-top: 4px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 11px;
 }
 
 .day-header {

@@ -1,4 +1,7 @@
 let tarefas = [];
+let lembretes = [];
+let dataAtual = new Date();
+let notasMensais = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     carregarTarefas();
@@ -9,6 +12,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (document.querySelector("#lista-concluidas")) {
         renderizarConcluidas();
+    }
+
+    if (document.querySelector("#calendarGrid")) {
+        carregarLembretes();
+        carregarNotasMes();
+        renderizarCalendario();
+        atualizarNotaMes();
+
+        document.getElementById("prevMes")?.addEventListener("click", () => {
+            dataAtual.setMonth(dataAtual.getMonth() - 1);
+            renderizarCalendario();
+            atualizarNotaMes();
+        });
+
+        document.getElementById("nextMes")?.addEventListener("click", () => {
+            dataAtual.setMonth(dataAtual.getMonth() + 1);
+            renderizarCalendario();
+            atualizarNotaMes()
+        });
+
     }
 });
 
@@ -219,3 +242,109 @@ function restaurar(id) {
     salvarTarefas();
     renderizarConcluidas();
 };
+
+function salvarLembretes() {
+    localStorage.setItem("lembretes", JSON.stringify(lembretes));
+}
+
+function carregarLembretes() {
+    const dados = localStorage.getItem("lembretes");
+    lembretes = dados ? JSON.parse(dados) : [];
+}
+
+function criarLembrete(descricao, data, hora) {
+    const novo = {
+        id: Date.now().toString(),
+        descricao: descricao,
+        data: data,
+        hora: hora || null,
+        criadaEm: Date.now()
+    }
+
+    lembretes.push(novo);
+    salvarLembretes();
+    renderizarCalendario();
+}
+
+if (document.querySelector("#btnAddLembrete")) {
+    document.querySelector("#btnAddLembrete").addEventListener("click", () => {
+        const desc = document.getElementById("lembrete").value;
+        const data = document.getElementById("data").value;
+        const hora = document.getElementById("hora").value;
+
+        criarLembrete(desc, data, hora);
+    })
+}
+
+function renderizarCalendario() {
+    const grid = document.getElementById("calendarGrid");
+    const mesTitulo = document.getElementById("mesAtual");
+
+    grid.innerHTML = "";
+
+    const ano = dataAtual.getFullYear();
+    const mes = dataAtual.getMonth();
+
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const totalDias = new Date(ano, mes + 1, 0).getDate();
+
+    const meses = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+        "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    mesTitulo.textContent = `${meses[mes]} ${ano}`;
+
+    for (let i = 0; i < primeiroDia; i++) {
+        grid.innerHTML += `<div></div>`;
+    }
+
+    for (let dia = 1; dia <= totalDias; dia++) {
+        const dataFormatada = `${ano}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+
+        const lembretesDoDia = lembretes.filter(l => l.data == dataFormatada);
+
+        let conteudoLembretes = "";
+
+        lembretesDoDia.forEach(l => {
+            conteudoLembretes += `<div class="lembrete">
+                ${l.hora ? l.hora + " - " : ""}${l.descricao}
+            </div>`;
+        });
+
+        grid.innerHTML += `
+            <div class="day">
+                <strong>${dia}</strong>
+                ${conteudoLembretes}
+            </div>
+        `;
+    }
+}
+
+function salvarNotaMes() {
+    localStorage.setItem("notasMes", JSON.stringify(notasMensais));
+}
+
+function carregarNotasMes() {
+    const dados = localStorage.getItem("notasMes");
+    notasMensais = dados ? JSON.parse(dados) : {};
+
+}
+
+function chaveMes() {
+    return `${dataAtual.getFullYear()}-${dataAtual.getMonth()}`;
+}
+
+function atualizarNotaMes() {
+    const input = document.getElementById("notasMes");
+    if (!input) return;
+
+    input.value = notasMensais[chaveMes()] || "";
+}
+
+document.getElementById("btnNotasMes")?.addEventListener("click", () => {
+    const input = document.getElementById("notasMes");
+    notasMensais[chaveMes()] = input.value;
+    salvarNotaMes();
+});
+

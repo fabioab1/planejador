@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Calendário</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+
 </head>
+
 <body>
 
-<div class="navbar">
-  <div class="nav-title">📅 Calendário</div>
-  <div class="nav-links">
-    <a href="index.html">Início</a>
-    <a href="concluidas.html">Concluídas</a>
-  </div>
-</div>
-
-<!-- FORM -->
-<div class="form">
-  <input class="input" type="text" placeholder="Lembrete">
-  <input class="input" type="date">
-  <button class="btn btn-primary">Adicionar</button>
-</div>
-
-<!-- ANOTAÇÃO MENSAL -->
-<div class="form">
-  <input class="input" type="text" placeholder="Anotações do mês">
-</div>
-
-<!-- CALENDÁRIO -->
-<div class="calendar">
-  
-  <div class="calendar-header">
-    <button class="btn btn-light">⬅️</button>
-    <h3>Abril 2026</h3>
-    <button class="btn btn-light">➡️</button>
+  <div class="navbar">
+    <div class="nav-title">📅 Calendário</div>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="concluidas.html">Concluídas</a>
+    </div>
   </div>
 
-  <div class="calendar-grid">
-    
-    <!-- DIAS DA SEMANA -->
-    <div class="day-header">Dom</div>
-    <div class="day-header">Seg</div>
-    <div class="day-header">Ter</div>
-    <div class="day-header">Qua</div>
-    <div class="day-header">Qui</div>
-    <div class="day-header">Sex</div>
-    <div class="day-header">Sáb</div>
+  <!-- FORM -->
+  <div class="form">
+    <input class="input" type="text" id="lembrete" placeholder="Lembrete">
+    <input class="input" type="date" id="data">
+    <input class="input" type="time" id="hora">
+    <button class="btn btn-primary" id="btnAddLembrete">Adicionar</button>
+  </div>
 
-    <!-- DIAS -->
-    <div class="day">1</div>
-    <div class="day">2</div>
-    <div class="day">3</div>
-    <div class="day">4</div>
-    <div class="day">5</div>
-    <div class="day">6</div>
-    <div class="day">7</div>
+  <!-- ANOTAÇÃO MENSAL -->
+  <div class="form">
+    <input class="input" type="text" id="notasMes" placeholder="Anotações do mês">
+    <button class="btn btn-primary" id="btnNotasMes">Salvar</button>
+  </div>
+
+  <!-- CALENDÁRIO -->
+  <div class="calendar">
+
+    <div class="calendar-header">
+      <button class="btn btn-light" id="prevMes">⬅️</button>
+      <h3 id="mesAtual">Abril 2026</h3>
+      <button class="btn btn-light" id="nextMes">➡️</button>
+    </div>
+
+    <div class="week-header">
+      <div class="day-header">Dom</div>
+      <div class="day-header">Seg</div>
+      <div class="day-header">Ter</div>
+      <div class="day-header">Qua</div>
+      <div class="day-header">Qui</div>
+      <div class="day-header">Sex</div>
+      <div class="day-header">Sáb</div>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
 
   </div>
 
-</div>
+  </div>
 
 </body>
+<script src="script.js"></script>
+
 </html>
