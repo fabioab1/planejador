@@ -69,9 +69,9 @@ body {
   border-left: 6px solid #ccc;
 }
 
-.card-high { border-color: #ef4444; }
-.card-medium { border-color: #f59e0b; }
-.card-low { border-color: #10b981; }
+.card-alta { border-color: #ef4444; }
+.card-media { border-color: #f59e0b; }
+.card-baixa { border-color: #10b981; }
 
 .card-actions {
   margin-top: 8px;

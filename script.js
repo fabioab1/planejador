@@ -31,7 +31,7 @@ function criarTarefa(descricao, prioridade, data) {
 
 document.querySelector("#btnAdicionar").addEventListener("click", () => {
     const desc = document.querySelector("input[type=text]").value;
-    const prio = document.querySelector("select").value;
+    const prio = document.querySelector("#prioridade").value;
     const data = document.querySelector("input[type=date]").value;
 
     criarTarefa(desc, prio, data);
