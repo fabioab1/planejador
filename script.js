@@ -1,7 +1,16 @@
 let tarefas = [];
 
-carregarTarefas();
-renderizarTarefas();
+document.addEventListener("DOMContentLoaded", () => {
+    carregarTarefas();
+
+    if (document.querySelector(".kanban") && document.querySelector("#entrada")) {
+        renderizarTarefas();
+    }
+
+    if (document.querySelector("#lista-concluidas")) {
+        renderizarConcluidas();
+    }
+});
 
 function salvarTarefas() {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -95,7 +104,12 @@ function concluir(id) {
 function deletar(id) {
     tarefas = tarefas.filter(t => t.id !== id);
     salvarTarefas();
-    renderizarTarefas();
+
+    if (document.querySelector("#lista-concluidas")) {
+        renderizarConcluidas();
+    } else {
+        renderizarTarefas();
+    }
 }
 
 let tarefaArrastada = null;
@@ -160,6 +174,7 @@ function renderizarAgenda() {
         .filter(t => !t.concluida)
         .forEach(t => {
             if (t.data) {
+
                 if (filtroHoje(t.data)) {
                     hojeDiv.innerHTML += `<div>${t.descricao}</div>`;
                 } else if (filtroSemana(t.data)) {
@@ -169,17 +184,17 @@ function renderizarAgenda() {
         });
 }
 
-
-
 function renderizarConcluidas() {
     const lista = document.querySelector("#lista-concluidas");
+
+    lista.innerHTML = "";
 
     tarefas
         .filter(t => t.concluida)
         .sort((a, b) => b.criadaEm - a.criadaEm)
         .forEach(t => {
             lista.innerHTML += `
-                <div class="card>
+                <div class="card">
                     ${t.descricao}
                     <button onclick="restaurar('${t.id}')">↩️</button>
                     <button onclick="deletar('${t.id}')">🗑️</button>
@@ -194,5 +209,5 @@ function restaurar(id) {
     tarefa.coluna = "entrada";
 
     salvarTarefas();
-    renderizarTarefas();
-}
+    renderizarConcluidas();
+};
