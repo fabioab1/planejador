@@ -323,6 +323,7 @@ function renderizarCalendario() {
         lembretesDoDia.forEach(l => {
             conteudoLembretes += `<div class="lembrete">
                 ${l.hora ? l.hora + " - " : ""}${l.descricao}
+                <button onclick="deletarLembrete('${l.id}')" class="btn-del">✖</button>
             </div>`;
         });
 
@@ -364,4 +365,10 @@ function atualizarNotaMes() {
             ? `📝 ${nota}`
             : "";
     }
+}
+
+function deletarLembrete(id) {
+    lembretes = lembretes.filter(l => l.id !== id);
+    salvarLembretes();
+    renderizarCalendario();
 }
