@@ -70,7 +70,7 @@ function criarCard(tarefa) {
 
     div.innerHTML = `
         <strong>${tarefa.descricao}</strong>
-        ${tarefa.data ? `<div>📅 ${tarefa.data}</div>` : ""}
+        ${tarefa.data ? `<div>📅 ${formatarData(tarefa.data)}</div>` : ""}
 
         <div class="card-actions">
             <button onclick="editar('${tarefa.id}')">✏️</button>
@@ -80,6 +80,11 @@ function criarCard(tarefa) {
 
     adicionarEventosDrag(div);
     return div;
+}
+
+function formatarData(data) {
+    const [ano, mes, dia] = data.split("-");
+    return `${dia}/${mes}/${ano}`;
 }
 
 function editar(id) {
@@ -194,8 +199,11 @@ function renderizarConcluidas() {
         .sort((a, b) => b.criadaEm - a.criadaEm)
         .forEach(t => {
             lista.innerHTML += `
-                <div class="card">
-                    ${t.descricao}
+                <div class="card card-${t.prioridade}">
+                    <strong>${t.descricao}</strong>
+
+                    ${t.data ? `<div class="card-date">📅 ${formatarData(t.data)}</div>` : ""}
+
                     <button onclick="restaurar('${t.id}')">↩️</button>
                     <button onclick="deletar('${t.id}')">🗑️</button>
                 </div>

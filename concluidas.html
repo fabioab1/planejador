@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Tarefas Concluídas</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <title>Tarefas Concluídas</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="navbar">
-  <div class="nav-title">📦 Arquivadas</div>
-  <div class="nav-links">
-    <a href="index.html">Início</a>
-    <a href="calendario.html">Calendário</a>
-  </div>
-</div>
+    <div class="navbar">
+        <div class="nav-title">📦 Arquivadas</div>
+        <div class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="calendario.html">Calendário</a>
+        </div>
+    </div>
 
-<div class="form">
-  <button class="btn btn-danger">Apagar todas</button>
-</div>
+    <div class="form">
+        <button class="btn btn-danger" id="btnApagarTodas">Apagar todas</button>
+    </div>
 
-<div class="kanban" style="grid-template-columns: 1fr;">
-    <div id="lista-concluidas"></div>
-</div>
+    <div class="kanban" style="grid-template-columns: 1fr;">
+        <div id="lista-concluidas"></div>
+    </div>
 
 
 
 </body>
+<script src="script.js"></script>
+
 </html>
