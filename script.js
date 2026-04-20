@@ -228,9 +228,21 @@ function renderizarAgenda() {
             if (t.data) {
 
                 if (filtroHoje(t.data)) {
-                    hojeDiv.innerHTML += `<div>${t.descricao} - ${formatarData(t.data)}</div>`;
+                    hojeDiv.innerHTML += `
+                        <div class="task-chip prioridade-${t.prioridade}">
+                            <span class="task-icon">📌</span>
+                            <span class="task-text">${t.descricao}</span>
+                            <span class="task-date">📅 ${formatarData(t.data)}</span>
+                        </div>
+                `;
                 } else if (filtroSemana(t.data)) {
-                    semanaDiv.innerHTML += `<div>${t.descricao} - ${formatarData(t.data)}</div>`;
+                    semanaDiv.innerHTML += `
+                    <div class="task-chip prioridade-${t.prioridade}">
+                        <span class="task-icon">📌</span>
+                        <span class="task-text">${t.descricao}</span>
+                        <span class="task-date">📅 ${formatarData(t.data)}</span>
+                    </div>
+                `;
                 }
             }
         });
